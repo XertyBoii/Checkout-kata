@@ -11,6 +11,10 @@ class Checkout
       @pricing_rules = pricing_rules
     end
 
+    def self.price(items, pricing_rules)
+      new(items, pricing_rules).price
+    end
+
     def price
       counted_items.sum do |item, count|
         Discounter.discount(item, count, pricing_rules.fetch(item))

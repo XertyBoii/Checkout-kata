@@ -1,5 +1,3 @@
-require 'pry'
-
 class Checkout
   class Discounter
 
@@ -32,6 +30,8 @@ class Checkout
         count >= 2 # at least 2
       when :half_price
         true #always half price, no requirements
+      when :restricted_half_price
+        true # even when restricted it should still discount always
       when :three_for_two
         count >= 3 # at least 3
       else
@@ -45,6 +45,8 @@ class Checkout
         price * (count / 2)
       when :half_price
         (price / 2) * count
+      when :restricted_half_price
+        price * (count - 1) + (price / 2)
       when :three_for_two
         (price * count) - (price * (count / 3))
       end
@@ -56,7 +58,8 @@ class Checkout
         apple: :two_for_one,
         pear: :two_for_one,
         banana: :half_price,
-        pineapple: :three_for_two,
+        pineapple: :restricted_half_price,
+        mango: :three_for_two,
       }
     end
   end

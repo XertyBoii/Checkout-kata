@@ -6,7 +6,7 @@ RSpec.describe Checkout do
     subject(:total) { checkout.total }
 
     let(:checkout) { Checkout.new(pricing_rules) }
-    
+
     let(:pricing_rules) do
       {
         apple: 10,
@@ -98,7 +98,6 @@ RSpec.describe Checkout do
       end
 
       it 'returns the discounted price for the basket' do
-        pending 'You need to write the code to satisfy this test'
         expect(total).to eq(600)
       end
     end
