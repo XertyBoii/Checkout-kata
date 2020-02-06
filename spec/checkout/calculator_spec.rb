@@ -30,5 +30,20 @@ RSpec.describe Checkout::Calculator do
       end
     end
 
+    context 'when a two_for_one discount should be applied' do
+      let(:items) do
+        [
+          :apple,
+          :apple,
+          :orange,
+          :pear
+        ]
+      end
+
+      it 'returns the discounted price' do
+        expect(price).to eq(45)
+      end
+    end
+
   end
 end

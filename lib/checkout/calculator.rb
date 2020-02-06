@@ -12,15 +12,16 @@ class Checkout
     end
 
     def price
-      undiscounted_price
+      counted_items.sum do |item, count|
+        Discounter.discount(item, count, pricing_rules.fetch(item))
+      end
     end
 
     private
 
-    def undiscounted_price
-      items.sum do |item|
-        pricing_rules.fetch(item, 0)
-      end
+    def counted_items
+      items.group_by(&:itself).map { |k,v| [k, v.length] }.to_h
     end
+
   end
 end
