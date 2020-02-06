@@ -11,8 +11,8 @@ RSpec.describe Checkout::Discounter do
     let(:price) { 10 }
 
     context 'when no discount applies' do
-      it 'returns 0' do
-        expect(discount).to eq(0)
+      it 'returns standard price' do
+        expect(discount).to eq(10)
       end
     end
 

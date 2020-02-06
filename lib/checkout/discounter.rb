@@ -3,15 +3,44 @@ require 'pry'
 class Checkout
   class Discounter
 
-    def self.discount(item, count, price)
-      new.discount(item, count, price)
+    attr_reader :item, :count, :price
+    private :item, :count, :price
+
+    def initialize(item, count, price)
+      @item = item
+      @count = count
+      @price = price
     end
 
-    def discount(item, count, price)
-      0
+    def self.discount(item, count, price)
+      new(item, count, price).discount
+    end
+
+    def discount
+      if should_discount?
+        discounted_price
+      else
+        price * count
+      end
     end
 
     private
+
+    def should_discount?
+      case discounts.fetch(item, nil)
+      when :two_for_one
+        (count % 2) == 0
+      else
+        false
+      end
+    end
+
+    def discounted_price
+      case discounts.fetch(item, nil)
+      when :two_for_one
+        price * (count / 2)
+      end
+    end
 
     def discounts
       # this method could be replaced by a DB connection
