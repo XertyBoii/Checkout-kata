@@ -1,3 +1,5 @@
+require_relative 'discounter'
+
 class Checkout
   class Calculator
 
@@ -10,6 +12,12 @@ class Checkout
     end
 
     def price
+      undiscounted_price
+    end
+
+    private
+
+    def undiscounted_price
       items.sum do |item|
         pricing_rules.fetch(item, 0)
       end
