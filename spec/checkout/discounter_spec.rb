@@ -42,5 +42,14 @@ RSpec.describe Checkout::Discounter do
       end
     end
 
+    context 'when a three_for_two discount applies but we have four items' do
+      let(:item) { :pineapple }
+      let(:count) { 4 }
+
+      it 'returns the price of three pineapples' do
+        expect(discount).to eq(30)
+      end
+    end
+
   end
 end

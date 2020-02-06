@@ -29,11 +29,11 @@ class Checkout
     def should_discount?
       case discounts.fetch(item, nil)
       when :two_for_one
-        (count % 2) == 0 # multiple of 2
+        count >= 2 # at least 2
       when :half_price
         true #always half price, no requirements
       when :three_for_two
-       (count % 3) == 0 # multiple of 3
+        count >= 3 # at least 3
       else
         false
       end
@@ -46,7 +46,7 @@ class Checkout
       when :half_price
         (price / 2) * count
       when :three_for_two
-        (price * count) - (price * (3 / count))
+        (price * count) - (price * (count / 3))
       end
     end
 
