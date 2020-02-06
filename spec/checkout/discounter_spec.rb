@@ -18,15 +18,18 @@ RSpec.describe Checkout::Discounter do
 
     context 'when a two_for_one discount applies' do
 
-      let(:items) do
-        [
-          :apple,
-          :apple
-        ]
-      end
+      let(:count) { 2 }
 
       it 'returns the price of one apple' do
         expect(discount).to eq(10)
+      end
+    end
+
+    context 'when a half_price discount applies' do
+      let(:item) { :banana }
+
+      it 'returns half the price of one banana' do
+        expect(discount).to eq(5)
       end
     end
 

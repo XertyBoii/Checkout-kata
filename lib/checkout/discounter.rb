@@ -30,6 +30,8 @@ class Checkout
       case discounts.fetch(item, nil)
       when :two_for_one
         (count % 2) == 0
+      when :half_price
+        true #always half price, no requirements
       else
         false
       end
@@ -39,6 +41,8 @@ class Checkout
       case discounts.fetch(item, nil)
       when :two_for_one
         price * (count / 2)
+      when :half_price
+        (price / 2) * count
       end
     end
 
